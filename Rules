@@ -28,3 +28,16 @@ alert tcp any any -> any 8080 (msg:"DOS Real Server template.html"; flow:to_serv
 
 alert udp any any -> any 161 (msg:"DOS Bay/Nortel Nautica Marlin"; dsize:0; reference:bugtraq,1009; reference:cve,2000-0221; classtype:attempted-dos; sid:279; rev:4;)
 
+alert udp any any -> any 9 (msg:"DOS Ascend Route"; content:"NAMENAME"; depth:50; offset:25; reference:arachnids,262; reference:bugtraq,714; reference:cve,1999-0060; classtype:attempted-dos; sid:281; rev:5;)
+
+alert tcp any any -> any 617 (msg:"DOS arkiea backup"; flow:to_server,established; dsize:>1445; reference:arachnids,261; reference:bugtraq,662; reference:cve,1999-0788; classtype:attempted-dos; sid:282; rev:8;)
+
+alert tcp any any -> any 135:139 (msg:"DOS Winnuke attack"; flow:stateless; flags:U+; reference:bugtraq,2010; reference:cve,1999-0153; classtype:attempted-dos; sid:1257; rev:10;)
+
+alert tcp any any -> any 3372 (msg:"DOS MSDTC attempt"; flow:to_server,established; dsize:>1023; reference:bugtraq,4006; reference:cve,2002-0224; reference:nessus,10939; classtype:attempted-dos; sid:1408; rev:10;)
+
+alert tcp any any -> any 6004 (msg:"DOS iParty DOS attempt"; flow:to_server,established; content:"|FF FF FF FF FF FF|"; offset:0; reference:bugtraq,6844; reference:cve,1999-1566; classtype:misc-attack; sid:1605; rev:6;)
+
+alert tcp any any -> any 6789:6790 (msg:"DOS DB2 dos attempt"; flow:to_server,established; dsize:1; reference:bugtraq,3010; reference:cve,2001-1143; reference:nessus,10871; classtype:denial-of-service; sid:1641; rev:10;)
+
+alert tcp any any -> $HTTP_SERVERS 80 (msg:"DOS Cisco attempt"; flow:to_server,established; dsize:1; content:"|13|"; classtype:web-application-attack; sid:1545; rev:8;)
