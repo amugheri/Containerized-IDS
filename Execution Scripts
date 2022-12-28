@@ -1,0 +1,2 @@
+docker run -it --rm --net=host projects/ccsnort:build3 /bin/bash
+snort -i ens33 -c /etc/snort/etc/snort.conf -A console
