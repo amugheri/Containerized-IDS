@@ -1,0 +1,30 @@
+alert tcp any any -> any 80 (msg:"Possible DOS Attack detected";sid:1000008;)
+
+alert ip any any -> any any (msg:"DOS Jolt attack"; dsize:408; fragbits:M; reference:cve,1999-0345; classtype:attempted-dos; sid:268; rev:4;)
+
+alert udp any any -> any any (msg:"DOS Teardrop attack"; fragbits:M; id:242; reference:bugtraq,124; reference:cve,1999-0015; reference:nessus,10279; reference:url,www.cert.org/advisories/CA-1997-28.html; classtype:attempted-dos; sid:270; rev:6;)
+
+alert udp any 19 <> any 7 (msg:"DOS UDP echo+chargen bomb"; reference:cve,1999-0103; reference:cve,1999-0635; classtype:attempted-dos; sid:271; rev:5;)
+
+alert ip any any -> any any (msg:"DOS IGMP dos attack"; fragbits:M+; ip_proto:2;
+
+reference:bugtraq,514; reference:cve,1999-0918;
+
+reference:url,www.microsoft.com/technet/security/bulletin/MS99-034.mspx; classtype:attempted-
+
+dos; sid:272; rev:10;)
+
+alert ip any any -> any any (msg:"DOS IGMP dos attack"; fragbits:M+; ip_proto:2; reference:bugtraq,514; reference:cve,1999-0918; classtype:attempted-dos; sid:273; rev:8;)
+
+alert icmp any any -> any any (msg:"DOS ath"; itype:8; content:"+++ath"; nocase; reference:arachnids,264; reference:cve,1999-1228; classtype:attempted-dos; sid:274; rev:5;)
+
+alert tcp any any <> any any (msg:"DOS NAPTHA"; flow:stateless; flags:S; id:413; seq:6060842; reference:bugtraq,2022; reference:cve,2000-1039; reference:url,razor.bindview.com/publish/advisories/adv_NAPTHA.html; reference:url,www.cert.org/advisories/CA-2000-21.html; reference:url,www.microsoft.com/technet/security/bulletin/MS00-091.mspx; classtype:attempted-dos; sid:275; rev:12;)
+
+alert tcp any any -> any 7070 (msg:"DOS Real Audio Server"; flow:to_server,established; content:"|FF F4 FF FD 06|"; reference:arachnids,411; reference:bugtraq,1288; reference:cve,2000-0474; classtype:attempted-dos; sid:276; rev:5;)
+
+alert tcp any any -> any 7070 (msg:"DOS Real Server template.html"; flow:to_server,established; content:"/viewsource/template.html?"; nocase; reference:bugtraq,1288; reference:cve,2000-0474; classtype:attempted-dos; sid:277; rev:5;)
+
+alert tcp any any -> any 8080 (msg:"DOS Real Server template.html"; flow:to_server,established; content:"/viewsource/template.html?"; nocase; reference:bugtraq,1288; reference:cve,2000-0474; classtype:attempted-dos; sid:278; rev:5;)
+
+alert udp any any -> any 161 (msg:"DOS Bay/Nortel Nautica Marlin"; dsize:0; reference:bugtraq,1009; reference:cve,2000-0221; classtype:attempted-dos; sid:279; rev:4;)
+
